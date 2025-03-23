@@ -2,11 +2,11 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Boldonse", system-ui;
 }
 
 body {
+  font-family: "Boldonse", system-ui;
   background-color: white;
   color: black;
 }

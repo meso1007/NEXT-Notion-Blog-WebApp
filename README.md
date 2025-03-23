@@ -1,41 +1,55 @@
-This is a [Next.js](https://nextjs.org/) blog using [Notions Public API](https://developers.notion.com).
+# Next.js + Notion API Blog
 
-__Demo:__ [https://notion-blog-nextjs-coral.vercel.app](https://notion-blog-nextjs-coral.vercel.app)
+This is a simple blog application built with [Next.js](https://nextjs.org/) and integrated with [Notion API](https://www.notion.so/my-integrations). The blog automatically pulls content from a Notion database and displays it on the website. The project leverages **Static Site Generation (SSG)** with Incremental Static Regeneration (ISR) to update the blog posts dynamically without rebuilding the entire site.
 
-__How-it-works/Documentation:__ [https://samuelkraft.com/blog/building-a-notion-blog-with-public-api](https://samuelkraft.com/blog/building-a-notion-blog-with-public-api)
+## Features
 
-## Getting Started
+- **Notion Integration:** Easily write and manage blog posts using Notion. The content is fetched automatically and displayed on the blog.
+- **Static Site Generation (SSG) with ISR:** The blog uses Next.js's ISR feature to generate static pages that are periodically revalidated, ensuring up-to-date content without rebuilding the whole site.
+- **Profile Section:** The page includes a simple profile section with a user profile picture and name.
+- **Responsive Design:** The website is designed to work across devices, providing a seamless reading experience.
 
-First, follow Notions [getting started guide](https://developers.notion.com/docs/getting-started) to get a `NOTION_TOKEN` and a `NOTION_DATABASE_ID`, then add them to a file called `.env.local`.
+## Setup and Installation
 
-As a reference here's the Notion table I am using: https://www.notion.so/5b53abc87b284beab0c169c9fb695b4d?v=e4ed5b1a8f2e4e12b6d1ef68fa66e518
+1. **Clone the Repository**
 
-```
-NOTION_TOKEN=
-NOTION_DATABASE_ID=
-```
+   Clone this repository to your local machine:
 
-Install dependencies
+   ```bash
+   git clone https://github.com/your-username/nextjs-notion-blog.git
+   cd nextjs-notion-blog
+2. **Install Dependencies**
 
-```bash
-npm install
-# or
-yarn
-```
+    Install the necessary dependencies using npm or yarn:
 
-Start the server with
+    ```bash
+    npm install
+    # or
+    yarn install
+3. **Configure Environment Variables**
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+    You can obtain the NOTION_DATABASE_ID by following the instructions on the Notion API documentation.
+    Set up the required environment variables in a .env.local file:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    ```ini
+    NOTION_TOKEN=<your-notion-token> 
+    NOTION_DATABASE_ID=<your-notion-database-id>
+4. **Run the Development Server**
 
-#### Deploy to vercel
+    The app will be running on http://localhost:3000.
+    Start the development server:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fsamuelkraft%2Fnotion-blog-nextjs&env=NOTION_TOKEN,NOTION_DATABASE_ID&envDescription=Please%20add%20NOTION_TOKEN%20and%20NOTION_DATABASE_ID%20that%20is%20required%20to%20connect%20the%20blog%20to%20your%20notion%20account.&envLink=https%3A%2F%2Fdevelopers.notion.com%2Fdocs%2Fgetting-started&project-name=notion-blog-nextjs&repo-name=notion-blog-nextjs&demo-title=Notion%20Blog%20Next%20JS&demo-description=%20This%20is%20a%20Next.js%20blog%20using%20Notions%20Public%20API.&demo-url=notion-blog-nextjs-coral.vercel.app)
-# notion-blog-template
-# notion-blog-template
-# NEXT-Notion-Blog-WebApp
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+## How It Works
+- **Fetching Data from Notion**: The getDatabase function fetches data from the specified Notion database. The posts are displayed in a list with their titles and last edited date.
+- **Static Generation with ISR**: The blog posts are pre-rendered at build time using getStaticProps. The revalidate property ensures that the posts are updated every 10 seconds without a full site rebuild.
+- **Styling**: The project uses custom CSS modules to style the components.
+
+## Folder Structure
+- **pages/index.js**: The main page displaying the list of blog posts.
+- **pages/[id].js**: The individual post page that displays the full content.
+- **lib/notion.js**: Contains the logic to fetch data from the Notion database.
+- **styles/**: Contains the CSS modules used for styling.

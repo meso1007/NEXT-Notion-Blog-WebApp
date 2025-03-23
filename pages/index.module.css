@@ -1,66 +1,115 @@
-.container {
-  padding: 0 20px;
-  max-width: 700px;
+.pageContainer {
+  font-family: 'Noto Sans', 'Noto Sans JP', sans-serif;
+  background-color: #e9e6d6;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh; /* Ensures the background covers the viewport height but allows expansion */
+  display: flex;
+  flex-direction: column;
+}
+.profileImage {
+  width: 50px;          /* 画像の幅 */
+  height: 50px;         /* 画像の高さ */
+  border-radius: 50%;   /* 丸い画像にする */
+  object-fit: cover;    /* 画像が枠に収まるように切り取る */
+  border: 2px solid #333; /* 画像に枠線を追加 */
+}
+
+
+.nameBlock {
+  display: flex;
+  align-items: center;  /* 垂直方向に中央揃え */
+  gap: 15px;   
+}
+
+.userName{
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+
+.mainContainer {
+  padding: 20px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-.logos {
-  display: flex;
-  align-items: center;
-  padding: 40px 0 20px;
-}
-
 .header {
-  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 0;
 }
 
-.header p {
-  opacity: 0.7;
-  line-height: 1.5;
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .plus {
-  font-size: 20px;
+  font-size: 24px;
   margin: 0 20px;
+  color: #000;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.subTitle {
+  font-size: 1.2rem;
+  color: #000;
+  opacity: 0.8;
+}
+
+.postsSection {
+  margin-top: 50px;
 }
 
 .heading {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #dedede;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  font-size: 15px;
-  opacity: 0.6;
-  letter-spacing: 0.5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .heading {
-    border-color: #343539;
-  }
+  margin-bottom: 30px;
+  color: #000;
+  opacity: 0.8;
 }
 
 .posts {
   list-style: none;
-  margin: 0;
   padding: 0;
 }
 
 .post {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 20px;
 }
 
 .postTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #000;
   margin-bottom: 10px;
-  font-size: 1.4rem;
 }
 
 .postTitle a {
+  text-decoration: none;
   color: inherit;
 }
 
 .postDescription {
-  margin-top: 0;
+  font-size: 1rem;
+  color: #000;
   margin-bottom: 12px;
-  opacity: 0.65;
+}
+
+.readMore {
+  color: #007BFF;
+  text-decoration: none;
+  font-size: 1
 }

@@ -169,25 +169,27 @@ export default function Post({ page, blocks }) {
     return <div />;
   }
   return (
-    <div>
+    <div className={styles.wrapper}>
       <Head>
         <title>{page.properties.Name.title[0].plain_text}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <article className={styles.container}>
-        <h1 className={styles.name}>
-          <Text text={page.properties.Name.title} />
-        </h1>
-        <section>
-          {blocks.map((block) => (
-            <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-          ))}
-          <Link href="/">
-            <a className={styles.back}>← Go home</a>
-          </Link>
-        </section>
-      </article>
+      <main className={styles.mainContent}>
+        <article className={styles.container}>
+          <h1 className={styles.name}>
+            <Text text={page.properties.Name.title} />
+          </h1>
+          <section>
+            {blocks.map((block) => (
+              <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+            ))}
+            <Link href="/">
+              <a className={styles.back}>← Go home</a>
+            </Link>
+          </section>
+        </article>
+      </main>
     </div>
   );
 }
@@ -205,8 +207,6 @@ export const getStaticProps = async (context) => {
   const page = await getPage(id);
   const blocks = await getBlocks(id);
 
-  // Retrieve block children for nested blocks (one level deep), for example toggle blocks
-  // https://developers.notion.com/docs/working-with-page-content#reading-nested-blocks
   const childBlocks = await Promise.all(
     blocks
       .filter((block) => block.has_children)
@@ -217,8 +217,8 @@ export const getStaticProps = async (context) => {
         };
       })
   );
+
   const blocksWithChildren = blocks.map((block) => {
-    // Add child blocks if the block should contain children but none exists
     if (block.has_children && !block[block.type].children) {
       block[block.type]["children"] = childBlocks.find(
         (x) => x.id === block.id
@@ -232,6 +232,6 @@ export const getStaticProps = async (context) => {
       page,
       blocks: blocksWithChildren,
     },
-    revalidate: 1, //ISR...前回から何秒以内のアクセスを無視するか指定します。
+    revalidate: 1,
   };
 };
