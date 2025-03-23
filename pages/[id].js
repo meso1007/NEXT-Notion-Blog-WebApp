@@ -171,7 +171,7 @@ export default function Post({ page, blocks }) {
   return (
     <div className={styles.wrapper}>
       <Head>
-        <title>{page.properties.Name.title[0].plain_text}</title>
+        <title className={styles.articleTitle}>{page.properties.Name.title[0].plain_text}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -184,8 +184,8 @@ export default function Post({ page, blocks }) {
             {blocks.map((block) => (
               <Fragment key={block.id}>{renderBlock(block)}</Fragment>
             ))}
-            <Link href="/">
-              <a className={styles.back}>← Go home</a>
+            <Link href="/" className={styles.back}>
+              ← Go home
             </Link>
           </section>
         </article>
