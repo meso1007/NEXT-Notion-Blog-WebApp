@@ -13,5 +13,9 @@
     "react": "17.x",
     "react-dom": "17.x",
     "react-syntax-highlighter": "^15.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.12",
+    "typescript": "^5.8.2"
   }
 }
