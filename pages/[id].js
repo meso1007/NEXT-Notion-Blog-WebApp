@@ -164,10 +164,11 @@ const renderBlock = (block) => {
   }
 };
 
-export default function Post({ page, blocks }) {
+export default function Post({ page, blocks, toc }) {
   if (!page || !blocks) {
     return <div />;
   }
+
   return (
     <div className={styles.wrapper}>
       <Head>
@@ -180,9 +181,29 @@ export default function Post({ page, blocks }) {
           <h1 className={styles.name}>
             <Text text={page.properties.Name.title} />
           </h1>
+
+          {toc.length > 0 && (
+            <nav className={styles.toc}>
+              <h2>📖 Contents</h2>
+              <ul>
+                {toc.map((item) => (
+                  <li key={item.id} className={styles[item.type]}>
+                    <a href={`#${item.id}`}>{item.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+
           <section>
             {blocks.map((block) => (
-              <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+              <Fragment key={block.id}>
+                {block.type.startsWith("heading_") ? (
+                  <div id={block.id}>{renderBlock(block)}</div>
+                ) : (
+                  renderBlock(block)
+                )}
+              </Fragment>
             ))}
             <Link href="/" className={styles.back}>
               ← Go home
@@ -220,7 +241,6 @@ export const getStaticProps = async (context) => {
       })
   );
 
-  // 子ブロックを追加
   const blocksWithChildren = blocks.map((block) => {
     if (block.has_children && !block[block.type].children) {
       block[block.type]["children"] = childBlocks.find(
@@ -230,7 +250,6 @@ export const getStaticProps = async (context) => {
     return block;
   });
 
-  // **目次データを作成**
   const toc = blocksWithChildren
     .filter((block) => ["heading_1", "heading_2", "heading_3"].includes(block.type))
     .map((block) => ({
@@ -243,7 +262,7 @@ export const getStaticProps = async (context) => {
     props: {
       page,
       blocks: blocksWithChildren,
-      toc, // 目次データを渡す
+      toc,
     },
     revalidate: 1,
   };
