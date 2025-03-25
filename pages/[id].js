@@ -206,7 +206,9 @@ export const getStaticProps = async (context) => {
   const { id } = context.params;
   const page = await getPage(id);
   const blocks = await getBlocks(id);
+  console.log(blocks);
 
+  // 子ブロックを取得
   const childBlocks = await Promise.all(
     blocks
       .filter((block) => block.has_children)
@@ -218,6 +220,7 @@ export const getStaticProps = async (context) => {
       })
   );
 
+  // 子ブロックを追加
   const blocksWithChildren = blocks.map((block) => {
     if (block.has_children && !block[block.type].children) {
       block[block.type]["children"] = childBlocks.find(
@@ -227,10 +230,20 @@ export const getStaticProps = async (context) => {
     return block;
   });
 
+  // **目次データを作成**
+  const toc = blocksWithChildren
+    .filter((block) => ["heading_1", "heading_2", "heading_3"].includes(block.type))
+    .map((block) => ({
+      id: block.id,
+      text: block[block.type].text[0].plain_text,
+      type: block.type,
+    }));
+
   return {
     props: {
       page,
       blocks: blocksWithChildren,
+      toc, // 目次データを渡す
     },
     revalidate: 1,
   };
