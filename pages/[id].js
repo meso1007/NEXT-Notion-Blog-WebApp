@@ -4,6 +4,7 @@ import { getDatabase, getPage, getBlocks } from "../lib/notion";
 import Link from "next/link";
 import { databaseId } from "./index.js";
 import styles from "./post.module.css";
+import { IoIosArrowBack } from "react-icons/io";
 
 export const Text = ({ text }) => {
   if (!text) {
@@ -36,21 +37,13 @@ const renderNestedList = (block) => {
   const value = block[type];
   if (!value) return null;
 
-  const isNumberedList = value.children[0].type === 'numbered_list_item'
+  const isNumberedList = value.children[0].type === "numbered_list_item";
 
   if (isNumberedList) {
-    return (
-      <ol>
-        {value.children.map((block) => renderBlock(block))}
-      </ol>
-    )
+    return <ol>{value.children.map((block) => renderBlock(block))}</ol>;
   }
-  return (
-    <ul>
-      {value.children.map((block) => renderBlock(block))}
-    </ul>
-  )
-}
+  return <ul>{value.children.map((block) => renderBlock(block))}</ul>;
+};
 
 const renderBlock = (block) => {
   const { type, id } = block;
@@ -151,10 +144,10 @@ const renderBlock = (block) => {
         </figure>
       );
     case "bookmark":
-      const href = value.url
+      const href = value.url;
       return (
-        <a href={ href } target="_brank" className={styles.bookmark}>
-          { href }
+        <a href={href} target="_brank" className={styles.bookmark}>
+          {href}
         </a>
       );
     default:
@@ -171,13 +164,20 @@ export default function Post({ page, blocks, toc }) {
 
   return (
     <div className={styles.wrapper}>
+
       <Head>
-        <title className={styles.articleTitle}>{page.properties.Name.title[0].plain_text}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title className={styles.articleTitle}>
+        {page.properties.Name.title[0].plain_text} - {page.properties.Author.rich_text[0]?.plain_text}
+        </title>
       </Head>
 
       <main className={styles.mainContent}>
+        
         <article className={styles.container}>
+        <Link href="/" className={styles.back}>
+          <IoIosArrowBack />
+        <p>BACK</p>
+      </Link>
           <h1 className={styles.name}>
             <Text text={page.properties.Name.title} />
           </h1>
@@ -205,10 +205,11 @@ export default function Post({ page, blocks, toc }) {
                 )}
               </Fragment>
             ))}
-            <Link href="/" className={styles.back}>
-              ← Go home
-            </Link>
           </section>
+          <Link href="/" className={styles.back}>
+          <IoIosArrowBack />
+        <p>BACK</p>
+      </Link>
         </article>
       </main>
     </div>
@@ -229,7 +230,6 @@ export const getStaticProps = async (context) => {
   const blocks = await getBlocks(id);
   console.log(blocks);
 
-  // 子ブロックを取得
   const childBlocks = await Promise.all(
     blocks
       .filter((block) => block.has_children)
@@ -251,7 +251,9 @@ export const getStaticProps = async (context) => {
   });
 
   const toc = blocksWithChildren
-    .filter((block) => ["heading_1", "heading_2", "heading_3"].includes(block.type))
+    .filter((block) =>
+      ["heading_1", "heading_2", "heading_3"].includes(block.type)
+    )
     .map((block) => ({
       id: block.id,
       text: block[block.type].text[0].plain_text,

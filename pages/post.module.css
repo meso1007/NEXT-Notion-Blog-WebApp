@@ -18,7 +18,7 @@
 .wrapper {
   font-family: 'Arial', sans-serif;
   background-color: #e9e6d6;
-  padding: 0;
+  padding: 0vw;
   width: 100vw;
   min-height: 100vh; /* Ensures the background covers the viewport height but allows expansion */
   display: flex;
@@ -48,8 +48,12 @@
 }
 
 .back {
-  display: inline-block;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 1rem;
+  margin: 1vh 0;
+  color: #007BFF;
 }
 
 .bold {
@@ -78,6 +82,7 @@
 
 .code_block {
   padding: 20px;
+  background-color: rgb(242, 242, 242);
   font-family: monospace;
   display: flex;
   flex-wrap: wrap;
