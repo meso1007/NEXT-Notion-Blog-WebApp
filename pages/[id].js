@@ -253,21 +253,24 @@ export const getStaticProps = async (context) => {
   });
 
   const toc = blocksWithChildren
-    .filter((block) =>
-      ["heading_1", "heading_2", "heading_3"].includes(block.type)
-    )
-    .map((block) => ({
-      id: block.id,
-      text: block[block.type].text[0].plain_text,
-      type: block.type,
-    }));
+  .filter((block) =>
+    ["heading_1", "heading_2", "heading_3"].includes(block.type)
+  )
+  .map((block) => {
+    console.log("Debug Block:", block); // デバッグ用ログ
+    const blockContent = block[block.type];
 
-  return {
-    props: {
-      page,
-      blocks: blocksWithChildren,
-      toc,
-    },
-    revalidate: 1,
-  };
+    if (!blockContent || !blockContent.text || blockContent.text.length === 0) {
+      console.warn(`Warning: Skipping block ${block.id} due to missing text`);
+      return null; // `null` を返して後で `filter(Boolean)` で削除
+    }
+
+    return {
+      id: block.id,
+      text: blockContent.text[0].plain_text,
+      type: block.type,
+    };
+  })
+  .filter(Boolean); // `null` の要素を削除
+
 };
