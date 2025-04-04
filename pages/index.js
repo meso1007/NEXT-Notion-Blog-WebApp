@@ -35,32 +35,7 @@ export default function Home({ posts }) {
 
                 <p className={styles.userName}>SHOYA HORIUCHI</p>
               </div>
-              <div className={styles.snsContainer}>
-                  <a
-                    className={styles.snsIcon}
-                    href="https://www.linkedin.com/in/shoya-horiuchi-83b785278/"
-                  >
-                    <FaLinkedin />
-                  </a>
 
-                  <a
-                    className={styles.snsIcon}
-                    href="https://www.instagram.com/sh02__nmi/"
-                  >
-                    <FaInstagram />
-                  </a>
-
-                  <a
-                    className={styles.snsIcon}
-                    href="https://github.com/meso1007"
-                  >
-                    <FaGithub />
-                  </a>
-
-                  <a className={styles.snsIcon} href="http://99.79.63.2/">
-                    <CgWebsite />
-                  </a>
-                </div>
             </div>
 
             <div className={styles.postContainer}>
