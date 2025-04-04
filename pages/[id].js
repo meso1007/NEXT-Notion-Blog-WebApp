@@ -10,13 +10,14 @@ export const Text = ({ text }) => {
   if (!text) {
     return null;
   }
-  return text.map((value) => {
+  return text.map((value, index) => {
     const {
       annotations: { bold, code, color, italic, strikethrough, underline },
       text,
     } = value;
     return (
       <span
+      key={index}
         className={[
           bold ? styles.bold : "",
           code ? styles.code : "",
@@ -26,7 +27,7 @@ export const Text = ({ text }) => {
         ].join(" ")}
         style={color !== "default" ? { color } : {}}
       >
-        {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
+        {text.link ? <a key={index} href={text.link.url}>{text.content}</a> : text.content}
       </span>
     );
   });
@@ -166,9 +167,10 @@ export default function Post({ page, blocks, toc }) {
     <div className={styles.wrapper}>
 
       <Head>
-        <title className={styles.articleTitle}>
-        {page.properties.Name.title[0].plain_text} - {page.properties.Author.rich_text[0]?.plain_text}
-        </title>
+      <title className={styles.articleTitle}>
+  {page.properties.Name?.title?.[0]?.plain_text ?? "Untitled"} - 
+  {page.properties.Author?.rich_text?.[0]?.plain_text ?? "Unknown Author"}
+</title>
       </Head>
 
       <main className={styles.mainContent}>
@@ -199,7 +201,7 @@ export default function Post({ page, blocks, toc }) {
             {blocks.map((block) => (
               <Fragment key={block.id}>
                 {block.type.startsWith("heading_") ? (
-                  <div id={block.id}>{renderBlock(block)}</div>
+                  <div key={block.id}>{renderBlock(block)}</div>
                 ) : (
                   renderBlock(block)
                 )}

@@ -62,30 +62,33 @@ export default function Home({ posts }) {
               <h2 className={styles.heading}>All Posts</h2>
               <ol className={styles.posts}>
                 {posts.map((post) => {
-    const date = post.properties.Date.date
-    ? post.properties.Date.date.start
-    : "";
+                  const date = post.properties.Date.date
+                    ? post.properties.Date.date.start
+                    : "";
                   const author = post.properties.Author.rich_text
                     ? post.properties.Author.rich_text
                         .map((item) => item.text.content)
                         .join("")
                     : "SHOYA HORIUCHI";
-                    const genre = post.properties.Genre.rich_text.length > 0
-                    ? post.properties.Genre.rich_text.map((item) => item.plain_text).join("")
-                    : "Lifestyle";
+                  const genre =
+                    post.properties.Genre.rich_text.length > 0
+                      ? post.properties.Genre.rich_text
+                          .map((item) => item.plain_text)
+                          .join("")
+                      : "Lifestyle";
                   return (
                     <li key={post.id} className={styles.post}>
                       <p className={styles.postGenre}>{genre}</p>
                       <h3 className={styles.postTitle}>
-                          <Link href={`/${post.id}`}>
-                            <Text text={post.properties.Name.title} />
-                          </Link>
-                        </h3>
+                        <Link href={`/${post.id}`}>
+                          <Text text={post.properties.Name.title} />
+                        </Link>
+                      </h3>
                       <p className={styles.postDate}>{date}</p>
                       <div className={styles.postTitleContainer}>
-                      <Link href={`/${post.id}`} className={styles.readMore}>
-                        READ POST →
-                      </Link>
+                        <Link href={`/${post.id}`} className={styles.readMore}>
+                          READ POST →
+                        </Link>
                         <p className={styles.postAuthor}>{author}</p>
                       </div>
                     </li>
