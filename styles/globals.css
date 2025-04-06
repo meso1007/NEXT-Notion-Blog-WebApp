@@ -5,11 +5,22 @@ body {
   font-family: "Boldonse", system-ui;
 }
 
-body {
-  font-family: "Boldonse", system-ui;
-  background-color: white;
-  color: black;
+@font-face {
+  font-family: 'Typefesse';
+  src: url('/fonts/Typefesse_Pleine.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Koolegant';
+  src: url('/fonts/Koolegant-K7my7.ttf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 @media (prefers-color-scheme: dark) {
   body {
