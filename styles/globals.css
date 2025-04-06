@@ -7,12 +7,13 @@ body {
 
 @font-face {
   font-family: 'Typefesse';
-  src: url('/fonts/Typefesse_Pleine.woff2') format('woff2');
+  src: url('/fonts/Typefesse_Pleine.eot') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
+/* url(../public/fonts/Typefesse_Pleine.woff2) url(../public/fonts/Typefesse_Pleine.woff) url(../public/fonts/Typefesse_Pleine.eot) url(../public/fonts/Typefesse_Claire-Obscure.woff2) url(../public/fonts/Typefesse_Claire-Obscure.woff) url(../public/fonts/Typefesse_Claire-Obscure.eot)  */
 @font-face {
   font-family: 'Koolegant';
   src: url('/fonts/Koolegant-K7my7.ttf') format('woff2');
