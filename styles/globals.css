@@ -1,8 +1,25 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: "Boldonse", system-ui;
+:root {
+  --bg-color: #f0f9ff;
+  /* Very light azure/sky blue */
+  --text-primary: #0c4a6e;
+  /* Deep Ocean Blue */
+  --text-secondary: #526d82;
+  /* Muted Blue Gray */
+  --accent-color: #0ea5e9;
+  /* Vivid Ocean Blue */
+  --accent-hover: #0284c7;
+  /* Darker Ocean Blue */
+  --border-color: #bae6fd;
+  /* Light Blue Border */
+  --card-bg: rgba(255, 255, 255, 0.9);
+  /* Slightly transparent white for glass feel */
+  --card-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.1), 0 4px 6px -2px rgba(14, 165, 233, 0.05);
+  /* Blue tinted shadow */
+  --secondary-bg: #e0f2fe;
+  /* Light Blue for tags */
+  --font-main: "Nunito", "M PLUS Rounded 1c", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Nunito", "M PLUS Rounded 1c", sans-serif;
+  /* Using rounded sans even for headers for softer look */
 }
 
 @font-face {
@@ -21,23 +38,55 @@ body {
   font-display: swap;
 }
 
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: rgb(24, 24, 31);
-    color: rgb(238, 238, 238);
-  }
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  /* Ocean gradient */
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
 a {
-  color: #2563eb;
+  color: var(--accent-color);
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
 }
 
 * {
   box-sizing: border-box;
 }
 
-h1 {
-  font-weight: 800;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0;
+}
+
+/* Dark mode validation - optional, but user asked for minimalist white, so focusing on light mode primarily. 
+   Adding basic dark mode support just in case. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a202c;
+    --text-primary: #f7fafc;
+    --text-secondary: #cbd5e0;
+    --accent-color: #63b3ed;
+    --accent-hover: #4299e1;
+    --border-color: #2d3748;
+    --card-bg: #2d3748;
+  }
 }

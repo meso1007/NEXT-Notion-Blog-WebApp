@@ -1,24 +1,36 @@
 .container {
-  font-family: 'Noto Sans', 'Noto Sans JP', sans-serif;
-  padding: 0 20px;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.5;
+  font-family: var(--font-main);
+  padding: 40px;
+  max-width: 1200px;
+  margin: 40px auto;
+  line-height: 1.8;
+  color: var(--text-primary);
+  background-color: var(--card-bg);
+  /* Glass/White background */
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(10px);
 }
 
-.articleTitle{
-  text-decoration: underline;
+.articleTitle {
+  text-decoration: none;
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 1rem;
 }
 
 .codeContainer {
-  background-color: #000;
+  background-color: #1e293b;
   color: aliceblue;
 }
 
 .wrapper {
-  font-family: 'Arial', sans-serif;
-  background-color: #e9e6d6;
-  padding: 0vw;
+  font-family: var(--font-main);
+  background-color: transparent;
+  padding: 0;
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -50,7 +62,7 @@
 .back {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   font-size: 1rem;
   margin: 1vh 0;
   color: #007BFF;
@@ -119,6 +131,7 @@
   display: block;
   margin-bottom: 10px;
 }
+
 .toc {
   background: #f4f4f4;
   padding: 15px;
@@ -144,14 +157,16 @@
 
 .toc a {
   text-decoration: none;
-  color: #556b8d; /* 落ち着いた青 */
+  color: #556b8d;
+  /* 落ち着いた青 */
   font-weight: 500;
   transition: color 0.2s ease-in-out;
 }
 
 .toc a:hover {
   text-decoration: underline;
-  color: #374b6d; /* 少し濃いめの青 */
+  color: #374b6d;
+  /* 少し濃いめの青 */
 }
 
 .heading_1 {
@@ -178,11 +193,13 @@
   .code {
     background-color: rgb(15, 8, 28);
   }
+
   .file:hover {
     background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
     border-radius: 2px;
   }
+
   .pre {
     background-color: rgb(15, 8, 28);
   }

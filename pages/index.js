@@ -26,20 +26,18 @@ export default function Home({ posts }) {
             <div className={styles.profileContainer}>
               <div className={styles.nameBlock}>
                 <Image
-                  src="/image/profile-pic.jpeg"
+                  src="/image/profile-pic.png"
                   alt="Profile Picture"
-                  width={100}
-                  height={100}
+                  width={64}
+                  height={64}
                   className={styles.profileImage}
                 />
-
                 <p className={styles.userName}>SHOYA HORIUCHI</p>
               </div>
-
             </div>
 
             <div className={styles.postContainer}>
-              <h2 className={styles.heading}>All Posts</h2>
+              <h2 className={styles.heading}>Latest Posts</h2>
 
               <ol className={styles.posts}>
                 {posts.map((post) => {
@@ -49,39 +47,33 @@ export default function Home({ posts }) {
 
                   const author = post.properties.Author.rich_text
                     ? post.properties.Author.rich_text
-
-                        .map((item) => item.text.content)
-
-                        .join("")
+                      .map((item) => item.text.content)
+                      .join("")
                     : "SHOYA HORIUCHI";
 
                   const genre =
                     post.properties.Genre.rich_text.length > 0
                       ? post.properties.Genre.rich_text
-
-                          .map((item) => item.plain_text)
-
-                          .join("")
+                        .map((item) => item.plain_text)
+                        .join("")
                       : "Lifestyle";
 
                   return (
                     <li key={post.id} className={styles.post}>
-                      <p className={styles.postGenre}>{genre}</p>
-
                       <h3 className={styles.postTitle}>
                         <Link href={`/${post.id}`}>
                           <Text text={post.properties.Name.title} />
                         </Link>
                       </h3>
 
-                      <p className={styles.postDate}>{date}</p>
-
-                      <div className={styles.postTitleContainer}>
-                        <Link href={`/${post.id}`} className={styles.readMore}>
-                          READ POST →
-                        </Link>
-                        <p className={styles.postAuthor}>{author}</p>
+                      <div className={styles.postMeta}>
+                        <span className={styles.postGenre}>{genre}</span>
+                        <p className={styles.postDate}>{date}</p>
                       </div>
+
+                      <Link href={`/${post.id}`} className={styles.readMore}>
+                        Read Post →
+                      </Link>
                     </li>
                   );
                 })}

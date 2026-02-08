@@ -1,71 +1,35 @@
 .pageContainer {
-  font-family: 'Noto Sans', 'Noto Sans JP', sans-serif;
-  background-color: #e9e6d6;
-  padding: 0;
+  font-family: var(--font-main);
+  background-color: transparent;
+  /* Let body gradient show */
   width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  opacity: 0; 
-  animation: slideIn 1s forwards;
+  opacity: 0;
+  animation: slideIn 0.4s ease-out forwards;
 }
 
 @keyframes slideIn {
-  0% {
-    transform: translateY(20px); 
+  from {
+    transform: translateY(20px);
     opacity: 0;
   }
-  100% {
+
+  to {
     transform: translateY(0);
     opacity: 1;
   }
 }
 
-.profileContainer {
-  width: 60vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.snsContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-size: 3.2rem;
-  color: #000;
-  gap: 5px;
-}
-
-.snsIcon {
-  color: #000;
-}
-
-.profileImage {
-  width: 50px;
-  height: 50px;
-  border-radius: 20px;
-  object-fit: cover;
-  border: 2px solid #333;
-}
-
-.nameBlock {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.userName {
-  font-family: "Oswald";
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 3rem;
-}
-
 .mainContainer {
-  max-width: 90vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Header Section - Same as before but cleaner */
 .header {
   background-image: url("../public/image/fujisawa.jpg");
   height: 100vh;
@@ -76,25 +40,30 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-bottom: 4rem;
+  padding: 0;
+  border-bottom: none;
+  position: relative;
 }
 
-.logoWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.plus {
-  font-size: 24px;
-  margin: 0 20px;
-  color: #000;
+/* Add a subtle gradient overlay to bottom of header to blend with body */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 15rem;
+  background: linear-gradient(to top, var(--bg-color), transparent);
+  pointer-events: none;
 }
 
 .titleContainer {
   display: flex;
   flex-direction: column;
   gap: 0;
+  margin-top: 15vh;
+  /* Basic positioning */
 }
 
 .title {
@@ -103,6 +72,7 @@
   font-size: 11rem;
   font-weight: bold;
   color: #000;
+  line-height: 1;
 }
 
 .subTitle {
@@ -112,116 +82,163 @@
   font-size: 2rem;
   color: #000;
   opacity: 0.8;
+  margin: 0;
 }
 
+/* Posts Section */
 .postsSection {
-  width: 100vw;
-  margin-top: 50px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem 4rem;
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  gap: 4rem;
+}
+
+/* Profile / Intro */
+.profileContainer {
+  display: flex;
   align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.postContainer {
+.profileImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.nameBlock {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
-@media screen and (max-width: 768px) {
-
-  .profileContainer {
-    width: 80vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-  }
-
-  .snsContainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-size: 3.2rem;
-    color: #000;
-    gap: 3px;
-  }
-
-  .postContainer {
-    margin: 0 10vw;
-  }
-
-.title {
-  font-size: 8rem;
+.userName {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
 }
 
-.subTitle {
-  font-size: 1.5rem;
-  color: #000;}
+/* Posts List */
+.postContainer {
+  width: 100%;
 }
 
 .heading {
-  font-size: 2rem;
+  font-family: var(--font-main);
+  font-size: 0.875rem;
   text-transform: uppercase;
-  margin-bottom: 30px;
-  color: #000;
-  opacity: 0.8;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-weight: 600;
 }
 
 .posts {
   list-style: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
 .post {
-  margin-bottom: 40px;
-  border-bottom: 1px solid #000;
-  padding-bottom: 20px;
-}
-
-.postTitleContainer {
-  width: 100%;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
-  flex-direction: row;
-  align-items: center;  
+  flex-direction: column;
   justify-content: space-between;
 }
 
+.post:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow);
+  border-color: var(--accent-color);
+}
+
 .postTitle {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #000;
-  margin-bottom: 10px;
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
 }
 
 .postTitle a {
+  color: var(--text-primary);
   text-decoration: none;
-  color: inherit;
 }
 
-.postGenre{
-  display: inline-block;
-  margin: 0;
-  color: #676666;
-  border: 1px solid #676666;
-  padding: 5px 10px;
-  border-radius: 3px;
+.postTitle a:hover {
+  color: var(--accent-color);
 }
 
-.postAuthor {
-  color: #676666;
+.postMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.postGenre {
+  background-color: var(--secondary-bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--accent-color);
+  border: 1px solid var(--border-color);
 }
 
 .postDate {
-  font-size: 1rem;
-  color: #676666;
-  margin-bottom: 12px;
+  margin: 0;
 }
 
 .readMore {
-  color: #007BFF;
-  text-decoration: none;
-  font-size: 1
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
+
+.readMore:hover {
+  text-decoration: underline;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .postsSection {
+    padding: 0 1.5rem 4rem;
+  }
+
+  .posts {
+    grid-template-columns: 1fr;
+  }
+
+  .post {
+    padding: 1.5rem;
+  }
 }

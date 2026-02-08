@@ -152,34 +152,37 @@ const renderBlock = (block) => {
         </a>
       );
     default:
-      return `❌ Unsupported block (${
-        type === "unsupported" ? "unsupported by Notion API" : type
-      })`;
+      return `❌ Unsupported block (${type === "unsupported" ? "unsupported by Notion API" : type
+        })`;
   }
 };
 
 export default function Post({ page, blocks, toc }) {
   if (!page || !blocks) {
-    return <div />;
+    return (
+      <div className={styles.container}>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
     <div className={styles.wrapper}>
 
       <Head>
-      <title className={styles.articleTitle}>
-  {page.properties.Name?.title?.[0]?.plain_text ?? "Untitled"} - 
-  {page.properties.Author?.rich_text?.[0]?.plain_text ?? "Unknown Author"}
-</title>
+        <title className={styles.articleTitle}>
+          {page.properties.Name?.title?.[0]?.plain_text ?? "Untitled"} -
+          {page.properties.Author?.rich_text?.[0]?.plain_text ?? "Unknown Author"}
+        </title>
       </Head>
 
       <main className={styles.mainContent}>
-        
+
         <article className={styles.container}>
-        <Link href="/" className={styles.back}>
-          <IoIosArrowBack />
-        <p>BACK</p>
-      </Link>
+          <Link href="/" className={styles.back}>
+            <IoIosArrowBack />
+            <p>BACK</p>
+          </Link>
           <h1 className={styles.name}>
             <Text text={page.properties.Name.title} />
           </h1>
@@ -209,9 +212,9 @@ export default function Post({ page, blocks, toc }) {
             ))}
           </section>
           <Link href="/" className={styles.back}>
-          <IoIosArrowBack />
-        <p>BACK</p>
-      </Link>
+            <IoIosArrowBack />
+            <p>BACK</p>
+          </Link>
         </article>
       </main>
     </div>

@@ -13,15 +13,15 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
           <link
+            href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Nunito:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
             rel="stylesheet"
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap"
             rel="stylesheet"
           />
           <link
