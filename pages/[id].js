@@ -233,7 +233,6 @@ export const getStaticProps = async (context) => {
   const { id } = context.params;
   const page = await getPage(id);
   const blocks = await getBlocks(id);
-  console.log(blocks);
 
   const childBlocks = await Promise.all(
     blocks
@@ -260,11 +259,9 @@ export const getStaticProps = async (context) => {
       ["heading_1", "heading_2", "heading_3"].includes(block.type)
     )
     .map((block) => {
-      console.log("Debug Block:", block); // Debug log for checking block content
       const blockContent = block[block.type];
 
       if (!blockContent || !blockContent.text || blockContent.text.length === 0) {
-        console.warn(`Warning: Skipping block ${block.id} due to missing text`);
         return null; // Skip this block if it has no text content
       }
 

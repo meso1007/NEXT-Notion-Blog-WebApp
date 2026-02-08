@@ -31,7 +31,7 @@
 
 /* Header Section - Same as before but cleaner */
 .header {
-  background-image: url("../public/image/fujisawa.jpg");
+  background-image: url("/image/fujisawa.jpg");
   height: 100vh;
   background-size: cover;
   background-position: center 67%;
