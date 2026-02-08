@@ -33,6 +33,17 @@ export default function Home({ posts }) {
                   className={styles.profileImage}
                 />
                 <p className={styles.userName}>SHOYA HORIUCHI</p>
+                <div className={styles.socialLinks}>
+                  <a href="https://www.instagram.com/sh02__nmi/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+                    <FaInstagram />
+                  </a>
+                  <a href="https://www.linkedin.com/in/shoya-horiuchi-83b785278/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+                    <FaLinkedin />
+                  </a>
+                  <a href="https://www.shoyahoriuchi.me/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+                    <CgWebsite />
+                  </a>
+                </div>
               </div>
             </div>
 
